@@ -117,12 +117,12 @@ if ! shopt -oq posix; then
 fi
 
 alias sl='ls'
-export DISPLAY=localhost:10.0
+#export DISPLAY=localhost:10.0
 alias s='du -lh --max-depth=1'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-source /opt/ros/humble/setup.bash
-source ~/rti_connext_dds-6.1.1/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
+#source /opt/ros/humble/setup.bash
+#source ~/rti_connext_dds-6.1.1/resource/scripts/rtisetenv_x64Linux4gcc7.3.0.bash
