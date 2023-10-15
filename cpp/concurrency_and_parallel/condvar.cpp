@@ -8,7 +8,7 @@ std::condition_variable condVar;
 bool dataReady{false};
 
 void waitForWork() {
-  std::cout << "waiting...\n";
+  std::cout << "Waiting...\n";
 
   // 接收方通常需要频繁地对 mutex 进行加锁和解锁，因此需要 unique_lock
   std::unique_lock<std::mutex> lck{m};
@@ -35,3 +35,16 @@ int main() {
   t1.join();
   t2.join();
 }
+
+/*
+可能的输出结果：
+
+  Waiting...
+  Data ready!
+  Running...
+  -----------
+  Waiting...
+  Running...
+  Data ready!
+
+*/
