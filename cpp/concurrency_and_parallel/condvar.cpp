@@ -12,6 +12,8 @@ void waitForWork() {
 
   // 接收方通常需要频繁地对 mutex 进行加锁和解锁，因此需要 unique_lock
   std::unique_lock<std::mutex> lck{m};
+
+  // 此处必须传入谓词！防止丢失唤醒（notify 先于 wait 发生）及虚假唤醒（POSIX 和 Windows API 都存在该问题）
   condVar.wait(lck, [] { return dataReady; });
   std::cout << "Running...\n";
 }
