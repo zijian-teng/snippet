@@ -8,6 +8,7 @@ enable_testing()
 add_executable(condvar cpp/concurrency_and_parallel/condvar.cpp)
 add_executable(time_elapsed cpp/time_and_chrono/time_elapsed.cpp)
 add_executable(singleton cpp/design_pattern/singleton.cpp)
+add_executable(pimpl cpp/idioms/pimpl/MyInterface.cpp cpp/idioms/pimpl/pimpl.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
