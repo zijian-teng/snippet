@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "debug",
+            // 指定可以执行文件路径，必须和 task.json 中 -o 参数一致
+            "program": "${workspaceFolder}/build/${fileBasenameNoExtension}",
+            // 前置任务，必须和 task.json 中的 label 一致
+            "preLaunchTask": "clang++_debug",
+
+            // 以下内容不是必须，仅备忘
+            // "cwd": "${workspaceFolder}",
+            // "internalConsoleOptions": "neverOpen",
+            // "console": "integratedTerminal"
+        }
+    ]
+}
