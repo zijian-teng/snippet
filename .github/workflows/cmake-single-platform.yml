@@ -2,11 +2,7 @@
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
 name: CMake on a single platform
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: push
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -37,3 +33,23 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
 
+  clang-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Create build database
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+    - name: Run clang-tidy check
+      run: |
+        echo "Files to be checked:"
+        find cpp -name '*.cpp' -or -name '*.h'
+        find cpp -name '*.cpp' -or -name '*.h' | xargs clang-tidy -p build 2>&1 | tee tidy_output.txt
+    - name: Check for clang-tidy warnings
+      run: |
+        if grep -E -q 'warning:' tidy_output.txt; then
+          echo "Error: clang-tidy warnings found."
+          grep -E -B1 'warning:' tidy_output.txt
+          exit 1
+        else
+          echo "No new clang-tidy warnings found."
+        fi
