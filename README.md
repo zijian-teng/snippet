@@ -1,5 +1,13 @@
 # zsnippet 代码片段库
 
+该项目包含以下示例：
+
+- 使用 clang-tidy 和 clang-format 进行代码检查及格式化
+- 如何使用 github workflow，自动进行代码检查
+- 如何配置 vscode，提高工作效率
+- 通过 .gitignore 忽略文件
+- 现代 CMake 的配置
+
 ## 开发环境
 
 VSCode，必要插件：
