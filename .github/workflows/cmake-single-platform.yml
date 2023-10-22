@@ -37,14 +37,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Create build database
+
+    - name: clang-format lint
+      uses: DoozyX/clang-format-lint-action@v0.16.2
+
+    - name: 2.1 Create build database for clang-tidy
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-    - name: Run clang-tidy check
+    - name: 2.2 Run clang-tidy check
       run: |
         echo "Files to be checked:"
         find cpp -name '*.cpp' -or -name '*.h'
-        find cpp -name '*.cpp' -or -name '*.h' | xargs clang-tidy -p build 2>&1 | tee tidy_output.txt
-    - name: Check for clang-tidy warnings
+        find cpp -name '*.cpp' -or -name '*.h' | xargs clang-tidy -p build --quiet 2>&1 | tee tidy_output.txt
+    - name: 2.3 Check for clang-tidy warnings
       run: |
         if grep -E -q 'warning:' tidy_output.txt; then
           echo "Error: clang-tidy warnings found."

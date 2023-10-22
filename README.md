@@ -27,6 +27,5 @@ VSCode，必要插件：
 ## cheetsheet
 
 ```bash
-cd cpp/time_and_chrono
-clang-tidy *.cpp -p ../../build --quiet
+find cpp -name '*.cpp' -or -name '*.h' | xargs clang-tidy -p build --quiet
 ```

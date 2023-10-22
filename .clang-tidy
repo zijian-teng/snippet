@@ -1,9 +1,16 @@
 ---
-Checks:          'clang-diagnostic-*,clang-analyzer-*,cppcoreguidelines-*,google-readability-*,google-readability-*,performance-*,-cppcoreguidelines-avoid-non-const-global-variables'
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  google-*,
+  bugprone-*,
+  performance-*,
+  -cppcoreguidelines-avoid-non-const-global-variables
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
-FormatStyle:     none
+FormatStyle:     file
 CheckOptions:
   - key:             llvm-else-after-return.WarnOnConditionVariables
     value:           'false'
