@@ -27,5 +27,8 @@ VSCode，必要插件：
 ## cheetsheet
 
 ```bash
+# 创建 build 目录，并执行 cmake 命令，同时生成 compile_commands.json 文件
+cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+# 对 cpp 目录下所有 .cpp 和 .h 文件进行 clang-tidy 检查
 find cpp -name '*.cpp' -or -name '*.h' | xargs clang-tidy -p build --quiet
 ```
