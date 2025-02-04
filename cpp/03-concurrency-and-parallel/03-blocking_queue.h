@@ -19,6 +19,8 @@
 template <typename T>
 class BlockingQueue {
  public:
+  using QueueType = std::deque<T>;
+
   /**
    * @brief 添加任务到队列（线程安全）
    * @note 若在 Pop() 停止条件满足后调用 Push()，任务可能无法被处理
@@ -64,8 +66,8 @@ class BlockingQueue {
     return true;
   }
 
-  std::deque<T> PopAll() {
-    std::deque<T> queue;
+  QueueType PopAll() {
+    QueueType queue;
     {
       std::unique_lock<std::mutex> lock(mutex_);
       queue.swap(queue_);
@@ -85,5 +87,5 @@ class BlockingQueue {
  private:
   mutable std::mutex mutex_;
   std::condition_variable cv_;
-  std::deque<T> queue_;
+  QueueType queue_;
 };
