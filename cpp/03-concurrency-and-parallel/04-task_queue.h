@@ -15,6 +15,8 @@
  * 1. 单参构造，指定线程数量
  * 2. 支持优雅退出，调用 Shutdown() 之前的已经 Push() 的任务全部完成后才退出；
  *    但调用 AddTask() 之后、Push() 之前的任务可能不被执行
+ *
+ * @todo Task 优先级
  */
 
 class TaskPool {
