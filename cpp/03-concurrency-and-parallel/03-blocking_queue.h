@@ -64,6 +64,15 @@ class BlockingQueue {
     return true;
   }
 
+  std::deque<T> PopAll() {
+    std::deque<T> queue;
+    {
+      std::unique_lock<std::mutex> lock(mutex_);
+      queue.swap(queue_);
+    }
+    return queue;
+  }
+
   void NotifyAll() {
     cv_.notify_all();
   }
